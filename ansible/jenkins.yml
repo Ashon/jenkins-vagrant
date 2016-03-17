@@ -1,0 +1,15 @@
+---
+- name: install jenkins
+  sudo: yes
+  hosts: jenkins
+  tasks:
+    - name: get sourcelist
+      apt_key:
+        url: https://jenkins-ci.org/debian/jenkins-ci.org.key
+
+    - name: update aptitude list
+      copy: content="deb http://pkg.jenkins-ci.org/debian binary/" dest=/etc/apt/sources.list.d/jenkins.list
+
+    - name: install jenkins
+      apt: name=jenkins update_cache=yes
+
